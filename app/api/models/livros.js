@@ -10,7 +10,7 @@ const SchemaLivro = new Schema({
         required: true,
     },
     dataLancamento: {
-        type: Date,
+        type: String,
         trim: true,
         required: true
     }

@@ -6,7 +6,7 @@ module.exports = {
     create: function (req, res, next) {
         userModel.create(
             {
-                name: req.body.name,
+                nome: req.body.nome,
                 email: req.body.email,
                 password: req.body.password
             },
@@ -15,9 +15,9 @@ module.exports = {
                     next(err);
                 else
                     res.json({
-                        status: "success",
-                        message: "User added successfully!!!",
-                        data: null
+                        estado: "Sucesso.",
+                        mensagem: "Utilizador criado com sucesso!",
+                        dado: null
                     });
             }
         );
@@ -32,10 +32,25 @@ module.exports = {
                     next(err);
                 } else {
                     if (bcrypt.compareSync(req.body.password, userInfo.password)) {
-                        const token = jwt.sign({ id: userInfo._id }, req.app.get('secretKey'), { expiresIn: '1h' });
-                        res.json({ status: "success", message: "user found!!!", data: { user: userInfo, token: token } });
+                        const token = jwt.sign({
+                            id: userInfo._id
+                        }, req.app.get('secretKey'), {
+                            expiresIn: '1h'
+                        });
+                        res.json({
+                            estado: "Sucesso.",
+                            mensagem: "Utilizador encontrado!",
+                            data: {
+                                user: userInfo,
+                                token: token
+                            }
+                        });
                     } else {
-                        res.json({ status: "error", message: "Invalid email/password!!!", data: null });
+                        res.json({
+                            estado: "error",
+                            mensagem: "Invalid email/password!!!",
+                            dados: null
+                        });
                     }
                 }
             }

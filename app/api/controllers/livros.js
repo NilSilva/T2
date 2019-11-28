@@ -42,7 +42,8 @@ module.exports = {
     },
     updateById: function (req, res, next) {
         modeloLivro.findByIdAndUpdate(req.params.livroId, {
-            nome: req.body.nome
+            nome: req.body.nome,
+            dataLancamento: req.body.dataLancamento
         }, function (err, livroInfo) {
             if (err)
                 next(err);

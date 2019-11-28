@@ -1,6 +1,6 @@
 const express = require('express');
 const logger = require('morgan');
-const movies = require('./routes/movies');
+const livros = require('./routes/livros');
 const users = require('./routes/users');
 const bodyParser = require('body-parser');
 const mongoose = require('./config/database'); //configuração da base de dados
