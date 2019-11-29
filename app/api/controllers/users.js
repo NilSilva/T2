@@ -1,8 +1,13 @@
 const userModel = require('../models/users');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const path = require('path');
 
 module.exports = {
+    paginaRegister: function(req, res){
+        //console.log(path);
+        res.sendFile(path.join(__dirname + '../../../../app/views/register.html'));
+    },
     create: function (req, res, next) {
         userModel.create(
             {
