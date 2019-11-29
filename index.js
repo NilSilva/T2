@@ -61,7 +61,7 @@ app.use(function (err, req, res, next) {
     console.log(err);
 
     if (err.status === 404)
-        res.status(404).json({ message: "Não encontrado..." });
+        res.status(404).json({ message: "¯\_(ツ)_/¯" });
     else
         res.status(500).json({ message: "Algo não esta bem... ¯\_(ツ)_/¯" });
 });

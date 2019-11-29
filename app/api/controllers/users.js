@@ -10,7 +10,7 @@ module.exports = {
     },
     paginaAuth: function(req, res){
         //console.log(path);
-        res.sendFile(path.join(__dirname + '../../../../app/views/register.html'));
+        res.sendFile(path.join(__dirname + '../../../../app/views/login.html'));
     },
     create: function (req, res, next) {
         userModel.create(
