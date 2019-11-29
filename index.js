@@ -4,6 +4,7 @@ const livros = require('./routes/livros');
 const users = require('./routes/users');
 const bodyParser = require('body-parser');
 const mongoose = require('./config/database'); //configuração da base de dados
+const path = require('path');
 
 var jwt = require('jsonwebtoken');
 
@@ -17,7 +18,7 @@ mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection 
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/', function (req, res) {
-    res.json({ "Nil Silva": "API RESTful criada por mim." });
+    res.sendFile(path.join(__dirname + '/app/views/index.html'));
 });
 
 // Rota publica
