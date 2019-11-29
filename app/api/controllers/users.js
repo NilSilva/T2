@@ -8,6 +8,10 @@ module.exports = {
         //console.log(path);
         res.sendFile(path.join(__dirname + '../../../../app/views/register.html'));
     },
+    paginaAuth: function(req, res){
+        //console.log(path);
+        res.sendFile(path.join(__dirname + '../../../../app/views/register.html'));
+    },
     create: function (req, res, next) {
         userModel.create(
             {
@@ -19,11 +23,7 @@ module.exports = {
                 if (err)
                     next(err);
                 else
-                    res.json({
-                        estado: "Sucesso.",
-                        mensagem: "Utilizador criado com sucesso!",
-                        dado: null
-                    });
+                    res.sendFile(path.join(__dirname + '../../../../app/views/Sucesso.html'));
             }
         );
     },
