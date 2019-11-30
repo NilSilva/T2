@@ -61,11 +61,11 @@ app.use(function (err, req, res, next) {
     console.log(err);
 
     if (err.status === 404)
-        res.status(404).json({ message: "¯\_(ツ)_/¯" });
+        res.status(404).json({ message: "Não sei onde esta essa pagina... ¯\_(ツ)_/¯" });
     else
         res.status(500).json({ message: "Algo não esta bem... ¯\_(ツ)_/¯" });
 });
 
 app.listen(3000, function () {
-    console.log('Servidor no port 3000');
+    console.log('Servidor no port  (•_•) ( •_•)>⌐■-■ (⌐■_■)  3000!');
 });

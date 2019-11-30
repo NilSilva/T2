@@ -52,8 +52,8 @@ module.exports = {
                         });
                     } else {
                         res.json({
-                            estado: "error",
-                            mensagem: "Invalid email/password!!!",
+                            estado: "Erro.",
+                            mensagem: "Password/email errado. (>ლ)",
                             dados: null
                         });
                     }
