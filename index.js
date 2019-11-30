@@ -34,7 +34,6 @@ app.get('/favicon.ico', function (req, res) {
 });
 
 function validateUser(req, res, next) {
-    console.log(req.cookies['token']);
     jwt.verify(req.cookies['token'], req.app.get('secretKey'), function (err, decoded) {
         if (err) {
             res.json({

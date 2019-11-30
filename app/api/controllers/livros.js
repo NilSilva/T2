@@ -1,9 +1,11 @@
 const modeloLivro = require('../models/livros');
+const path = require('path');
 
 module.exports = {
+    page: function (req, res, next) {
+        res.sendFile(path.join(__dirname + '../../../../app/views/livros.html'));
+    },
     getById: function (req, res, next) {
-        console.log(req.body);
-
         modeloLivro.findById(req.params.livroId, function (err, livroInfo) {
             if (err) {
                 next(err);
@@ -32,11 +34,7 @@ module.exports = {
                     });
                 }
                 res.json({
-                    estado: "Sucesso",
-                    mensagem: "Lista de livros encontrada!",
-                    dado: {
-                        livros: listaLivros
-                    }
+                    livros: listaLivros
                 });
             }
         });

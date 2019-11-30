@@ -11,11 +11,9 @@ app.use(cookie());
 
 module.exports = {
     paginaRegister: function (req, res) {
-        //console.log(path);
         res.sendFile(path.join(__dirname + '../../../../app/views/register.html'));
     },
     paginaAuth: function (req, res) {
-        //console.log(path);
         res.sendFile(path.join(__dirname + '../../../../app/views/login.html'));
     },
     create: async function (req, res, next) {

@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 const livrosController = require('../app/api/controllers/livros');
 
-router.get('/', livrosController.getAll);
+router.get('/', livrosController.page);
+
+router.get('/all', livrosController.getAll);
 
 router.post('/', livrosController.create);
 
