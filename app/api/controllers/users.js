@@ -2,6 +2,12 @@ const userModel = require('../models/users');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const path = require('path');
+const express = require('express');
+const cookie = require('cookie-parser');
+
+const app = express();
+
+app.use(cookie());
 
 module.exports = {
     paginaRegister: function (req, res) {
@@ -47,7 +53,9 @@ module.exports = {
                             expiresIn: '1h'
                         });
                         
-                        
+                        res.cookie('token', token);
+
+                        res.sendFile(path.join(__dirname + '../../../../app/views/Sucesso.html'));
                     } else {
                         res.json({
                             estado: "Erro.",

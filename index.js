@@ -5,6 +5,7 @@ const users = require('./routes/users');
 const bodyParser = require('body-parser');
 const mongoose = require('./config/database'); //configuração da base de dados
 const path = require('path');
+const cookie = require('cookie-parser');
 
 var jwt = require('jsonwebtoken');
 
@@ -17,6 +18,8 @@ mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection 
 
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookie());
+
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname + '/app/views/index.html'));
 });
@@ -31,7 +34,8 @@ app.get('/favicon.ico', function (req, res) {
 });
 
 function validateUser(req, res, next) {
-    jwt.verify(req.headers['x-access-token'], req.app.get('secretKey'), function (err, decoded) {
+    console.log(req.cookies['token']);
+    jwt.verify(req.cookies['token'], req.app.get('secretKey'), function (err, decoded) {
         if (err) {
             res.json({
                 estado: "error",
