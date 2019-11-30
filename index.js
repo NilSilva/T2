@@ -24,6 +24,8 @@ app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname + '/app/views/index.html'));
 });
 
+app.use(express.static(path.join(__dirname, '/app/css')));
+
 // Rota publica
 app.use('/users', users);
 
