@@ -13,6 +13,10 @@ module.exports = {
         res.sendFile(path.join(__dirname + '../../../../app/views/login.html'));
     },
     create: function (req, res, next) {
+        const UserExiste = userModel.findOne({email: req.body.email});
+
+        if(UserExiste) return res.status(400).send('Este email já esta em utilização.')
+
         userModel.create(
             {
                 nome: req.body.nome,
