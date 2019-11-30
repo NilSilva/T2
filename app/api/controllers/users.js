@@ -4,18 +4,18 @@ const jwt = require('jsonwebtoken');
 const path = require('path');
 
 module.exports = {
-    paginaRegister: function(req, res){
+    paginaRegister: function (req, res) {
         //console.log(path);
         res.sendFile(path.join(__dirname + '../../../../app/views/register.html'));
     },
-    paginaAuth: function(req, res){
+    paginaAuth: function (req, res) {
         //console.log(path);
         res.sendFile(path.join(__dirname + '../../../../app/views/login.html'));
     },
     create: async function (req, res, next) {
-        const UserExiste = await userModel.findOne({email: req.body.email});
+        const UserExiste = await userModel.findOne({ email: req.body.email });
 
-        if(UserExiste) return res.status(400).send('Este email já esta em utilização.')
+        if (UserExiste) return res.status(400).send('Este email já esta em utilização.')
 
         userModel.create(
             {
@@ -46,14 +46,8 @@ module.exports = {
                         }, req.app.get('secretKey'), {
                             expiresIn: '1h'
                         });
-                        res.json({
-                            estado: "Sucesso.",
-                            mensagem: "Utilizador encontrado!",
-                            data: {
-                                user: userInfo,
-                                token: token
-                            }
-                        });
+                        
+                        
                     } else {
                         res.json({
                             estado: "Erro.",
