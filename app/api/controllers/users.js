@@ -12,8 +12,8 @@ module.exports = {
         //console.log(path);
         res.sendFile(path.join(__dirname + '../../../../app/views/login.html'));
     },
-    create: function (req, res, next) {
-        const UserExiste = userModel.findOne({email: req.body.email});
+    create: async function (req, res, next) {
+        const UserExiste = await userModel.findOne({email: req.body.email});
 
         if(UserExiste) return res.status(400).send('Este email já esta em utilização.')
 
