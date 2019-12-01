@@ -8,6 +8,8 @@ router.get('/all', livrosController.getAll);
 
 router.post('/', livrosController.create);
 
+router.get('/livro', livrosController.detalhes);
+
 router.get('/:livroId', livrosController.getById);
 
 router.put('/:livroId', livrosController.updateById);

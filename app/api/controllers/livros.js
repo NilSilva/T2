@@ -5,6 +5,9 @@ module.exports = {
     page: function (req, res, next) {
         res.sendFile(path.join(__dirname + '../../../../app/views/livros.html'));
     },
+    detalhes: function (req, res, next) {
+        res.sendFile(path.join(__dirname + '../../../../app/views/detalhes.html'));
+    },
     getById: function (req, res, next) {
         modeloLivro.findById(req.params.livroId, function (err, livroInfo) {
             if (err) {
