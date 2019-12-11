@@ -31,7 +31,7 @@ function tabelaLivros() {
         }
     };
 
-    xmlhttp.open("GET", 'http://localhost:3000/livros/all', true);
+    xmlhttp.open("GET", window.location.href + '/all', true);
     xmlhttp.setRequestHeader("x-access-token", getCookie('token'));
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send("x=" + dbParam);
@@ -53,4 +53,29 @@ function preenche() {
     document.getElementById("nome").innerHTML = getCookie('nome');
     document.getElementById("data").innerHTML = getCookie('data');
     console.log('id - ' + getCookie('id'));
+}
+
+function apagar(){
+    var url = 'http://' + window.location.host + '/livros/' + getCookie('id');
+
+    console.log('URL - ' + url);
+
+    var obj, dbParam, xmlhttp;
+
+    obj = { table: "livros" };
+
+    dbParam = JSON.stringify(obj);
+
+    xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function () {
+
+    }
+
+    xmlhttp.open("DELETE", url, true);
+    xmlhttp.setRequestHeader("x-access-token", getCookie('token'));
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("x=" + dbParam);
+
+    window.location.href = 'http://' + window.location.host + '/';
 }
