@@ -41,7 +41,7 @@ app.get('/favicon.ico', function (req, res) {
 //seed data
 var n;
 let listaLivros = [];
-console.log('ola');
+
 modeloLivro.find({}, function (err, livros) {
     if (err) {
         next(err);
@@ -149,6 +149,4 @@ app.use(function (err, req, res, next) {
         res.status(500).json({ message: "Algo não esta bem... ¯\_(ツ)_/¯" });
 });
 
-app.listen(3000, function () {
-    console.log('Servidor no port  (•_•) ( •_•)>⌐■-■ (⌐■_■)  3000!');
-});
+app.listen(process.env.PORT || 3000, console.log('Servidor no port  (•_•) ( •_•)>⌐■-■ (⌐■_■)  3000!'));
