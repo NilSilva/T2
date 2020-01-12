@@ -1,2 +1,0 @@
-Fazer o seed data na tabela livros:
-    mongoimport --db Livros --collection livros --file app\seed\livros.json
