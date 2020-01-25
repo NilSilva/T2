@@ -1,3 +1,5 @@
+//O este projeto esta disponivel no GitHub - https://github.com/NilSilva/T2
+
 const express = require('express'); //O express é uma framework de Node.js minimal e flexível que fornece um conjunto robusto de capacidades para aplicações de web
 const logger = require('morgan'); //É um logger de pedidos HTTP para o Node.js
 const bodyParser = require('body-parser'); //Fazer parse aos corpos que vêm nos pedidos num middleware que ficam disponíveis na propriedade req.body
