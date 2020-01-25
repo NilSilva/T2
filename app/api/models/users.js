@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const saltRounds = 10; //Controla quanto tempo demora a fazer hash
 
 //Define a schema
 const Schema = mongoose.Schema;
