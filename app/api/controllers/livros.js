@@ -2,6 +2,9 @@ const modeloLivro = require('../models/livros');
 const path = require('path');
 
 module.exports = {
+    adicionar: function (req, res, next) {
+        res.sendFile(path.join(__dirname + '../../../../app/views/adicionar.html'));
+    },
     page: function (req, res, next) {
         res.sendFile(path.join(__dirname + '../../../../app/views/livros.html'));
     },
@@ -79,11 +82,7 @@ module.exports = {
             if (err)
                 next(err);
             else
-                res.json({
-                    estado: "Sucesso.",
-                    mensagem: "Livro adicionado com sucesso!",
-                    dado: null
-                });
+                res.sendFile(path.join(__dirname + '../../../../app/views/Sucesso.html'));
         });
     },
 }
