@@ -8,6 +8,10 @@ router.get('/', livrosController.page); //rota para "host/livros/" -> tabela com
 
 router.get('/all', livrosController.getAll); //rota para obter um json com todos os livros
 
+router.post('/adicionar', livrosController.create);
+
+router.get('/adicionar', livrosController.adicionar);
+
 router.post('/', livrosController.create);
 
 router.get('/livro', livrosController.detalhes);
