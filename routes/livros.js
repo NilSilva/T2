@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
+
 const livrosController = require('../app/api/controllers/livros');
 
-router.get('/', livrosController.page);
+//rotas
+router.get('/', livrosController.page); //rota para "host/livros/" -> tabela com todos os livros
 
-router.get('/all', livrosController.getAll);
+router.get('/all', livrosController.getAll); //rota para obter um json com todos os livros
 
 router.post('/', livrosController.create);
 

@@ -23,7 +23,7 @@ const UserSchema = new Schema({
     }
 });
 
-// hash user password before saving into database
+// fazer hash à palavra passe antes de a guardar no base de dados
 UserSchema.pre('save', function (next) {
     this.password = bcrypt.hashSync(this.password, saltRounds);
 
