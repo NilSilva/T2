@@ -29,7 +29,7 @@ module.exports = {
             },
             function (err, result) {
                 if (err)
-                    next(err);
+                    res.sendFile(path.join(__dirname + '../../../../app/views/erro.html'));
                 else
                     res.sendFile(path.join(__dirname + '../../../../app/views/Sucesso.html'));
             }
@@ -41,8 +41,8 @@ module.exports = {
                 email: req.body.email
             },
             function (err, userInfo) {
-                if (err) {
-                    next(err);
+                if (err || userInfo == null) {
+                    res.sendFile(path.join(__dirname + '../../../../app/views/erro.html'));
                 } else {
                     if (bcrypt.compareSync(req.body.password, userInfo.password)) {
                         const token = jwt.sign({
@@ -50,16 +50,12 @@ module.exports = {
                         }, req.app.get('secretKey'), {
                             expiresIn: '1h'
                         });
-                        
+
                         res.cookie('token', token);
 
                         res.sendFile(path.join(__dirname + '../../../../app/views/Sucesso.html'));
                     } else {
-                        res.json({
-                            estado: "Erro.",
-                            mensagem: "Password/email errado. (>ლ)",
-                            dados: null
-                        });
+                        res.sendFile(path.join(__dirname + '../../../../app/views/erro.html'));
                     }
                 }
             }

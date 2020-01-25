@@ -47,7 +47,7 @@ let listaLivros = [];
 
 modeloLivro.find({}, function (err, livros) {
     if (err) {
-        next(err);
+        res.sendFile(path.join(__dirname + '/app/views/Erro.html'));
     } else {
         for (let livro of livros) {
             listaLivros.push({
@@ -120,11 +120,7 @@ function seedData() {
 function validateUser(req, res, next) {
     jwt.verify(req.cookies['token'], req.app.get('secretKey'), function (err, decoded) {
         if (err) {
-            res.json({
-                estado: "error",
-                mensagem: err.message,
-                dado: null
-            });
+            res.sendFile(path.join(__dirname + '/app/views/Erro.html'));
         } else {
             // adicionar o id do utilizador ao pedido
             req.body.userId = decoded.id;
@@ -136,11 +132,7 @@ function validateUser(req, res, next) {
 // o express não considera 'not found 404' como um erro por isso temos tratar dele explicitamente
 // tratar do erro 404
 app.use(function (req, res, next) {
-    let err = new Error('Não encontrado...');
-
-    err.status = 404;
-
-    next(err);
+    res.sendFile(path.join(__dirname + '/app/views/Erro.html'));
 });
 
 // tratar de erros
@@ -148,9 +140,9 @@ app.use(function (err, req, res, next) {
     console.log(err);
 
     if (err.status === 404)
-        res.status(404).json({ message: "Não sei onde esta essa pagina... ¯\_(ツ)_/¯" });
+        res.sendFile(path.join(__dirname + '/app/views/Erro.html'));
     else
-        res.status(500).json({ message: "Algo não esta bem... ¯\_(ツ)_/¯" });
+        res.sendFile(path.join(__dirname + '/app/views/Erro.html'));
 });
 
 // Começar o servidor

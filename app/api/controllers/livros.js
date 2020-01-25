@@ -14,15 +14,9 @@ module.exports = {
     getById: function (req, res, next) {
         modeloLivro.findById(req.params.livroId, function (err, livroInfo) {
             if (err) {
-                next(err);
+                res.sendFile(path.join(__dirname + '../../../../app/views/erro.html'));
             } else {
-                res.json({
-                    estado: "Sucesso",
-                    mensagem: "Livro encontrado!",
-                    dado: {
-                        livros: livroInfo
-                    }
-                });
+                res.sendFile(path.join(__dirname + '../../../../app/views/Sucesso.html'));
             }
         });
     },
@@ -30,7 +24,7 @@ module.exports = {
         let listaLivros = [];
         modeloLivro.find({}, function (err, livros) {
             if (err) {
-                next(err);
+                res.sendFile(path.join(__dirname + '../../../../app/views/erro.html'));
             } else {
                 for (let livro of livros) {
                     listaLivros.push({
@@ -51,26 +45,18 @@ module.exports = {
             dataLancamento: req.body.dataLancamento
         }, function (err, livroInfo) {
             if (err)
-                next(err);
+                res.sendFile(path.join(__dirname + '../../../../app/views/erro.html'));
             else {
-                res.json({
-                    estado: "Sucesso.",
-                    mensagem: "Livro editado com sucesso!",
-                    dado: null
-                });
+                res.sendFile(path.join(__dirname + '../../../../app/views/Sucesso.html'));
             }
         });
     },
     deleteById: function (req, res, next) {
         modeloLivro.findByIdAndRemove(req.params.livroId, function (err, livroInfo) {
             if (err)
-                next(err);
+                res.sendFile(path.join(__dirname + '../../../../app/views/erro.html'));
             else {
-                res.json({
-                    estado: "Sucesso.",
-                    mensagem: "Livro apagado com sucesso!",
-                    dado: null
-                });
+                res.sendFile(path.join(__dirname + '../../../../app/views/Sucesso.html'));
             }
         });
     },
@@ -80,7 +66,7 @@ module.exports = {
             dataLancamento: req.body.dataLancamento
         }, function (err, result) {
             if (err)
-                next(err);
+                res.sendFile(path.join(__dirname + '../../../../app/views/erro.html'));
             else
                 res.sendFile(path.join(__dirname + '../../../../app/views/Sucesso.html'));
         });
