@@ -18,6 +18,10 @@ module.exports = {
     paginaAuth: function (req, res) {
         res.sendFile(path.join(__dirname + '../../../../app/views/login.html'));
     },
+    //Ir para a pagina de editar
+    paginaEditar: function(req, res){
+        res.sendFile(path.join(__dirname + '../../../../app/views/editarUser.html'));
+    },
     //Criar um novo utilizador
     create: async function (req, res, next) {
         const UserExiste = await userModel.findOne({ email: req.body.email }); //ver se o email ja existe
@@ -57,8 +61,13 @@ module.exports = {
                             expiresIn: '1h'
                         });
 
+                        var id = userInfo._id;
+
                         //adicionar o token às cookies
                         res.cookie('token', token);
+
+                        //adicionar o id do utilizador as cookies
+                        res.cookie('UserID', id.toString());
 
                         res.sendFile(path.join(__dirname + '../../../../app/views/Sucesso.html'));
                     } else {
@@ -68,4 +77,38 @@ module.exports = {
             }
         );
     },
+    //procurar um utilizador por id
+    procurarPorID: function(req, res, next){
+        jwt.verify(req.cookies['token'], req.app.get('secretKey'), function (err, decoded) {
+            if (err) {
+                res.sendFile(path.join(__dirname + '/app/views/Erro.html'));
+            }
+        });
+
+        userModel.findById(req.params.UserID, function (err, userInfo) {
+            if (err) {
+                res.sendFile(path.join(__dirname + '/app/views/Erro.html'));
+            } else {
+                res.json({
+                        user: userInfo
+                });
+            }
+        })
+    },
+    //fazer update ao utilizador
+    updateById: function (req, res, next) {
+        const pass = bcrypt.hashSync(req.body.password, 10);
+
+        userModel.findByIdAndUpdate(req.cookies['UserID'], {
+            nome: req.body.nome,
+            email: req.body.email,
+            password: pass
+        }, function (err, userInfo) {
+            if (err)
+                res.sendFile(path.join(__dirname + '../../../../app/views/erro.html'));
+            else {
+                res.sendFile(path.join(__dirname + '../../../../app/views/Sucesso.html'));
+            }
+        });
+    }
 }

@@ -13,4 +13,10 @@ router.get('/authenticate', userController.paginaAuth); //rota para ir para a pa
 
 router.post('/authenticate', userController.authenticate); //rota para fazer login
 
+router.get('/editar', userController.paginaEditar); //rota para ir para a pagina de editar o utilizador
+
+router.get('/procurar/:UserID', userController.procurarPorID); //rota para procurar pelo id
+
+router.post('/editar', userController.updateById);
+
 module.exports = router;

@@ -17,6 +17,7 @@ function tabelaLivros() {
 
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
+            console.log('responcetext - ' + this.responseText);
             listaLivros = JSON.parse(this.responseText).livros;
 
             txt += "<table><thead><tr><td>Nome</td><td>Data de lançamento</td></tr></thead>"
@@ -68,14 +69,42 @@ function apagar(){
 
     xmlhttp = new XMLHttpRequest();
 
-    xmlhttp.onreadystatechange = function () {
-
-    }
-
     xmlhttp.open("DELETE", url, true);
     xmlhttp.setRequestHeader("x-access-token", getCookie('token'));
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send("x=" + dbParam);
 
     window.location.href = 'http://' + window.location.host + '/';
+}
+
+function editarUsers(){
+    var url = 'http://' + window.location.host + '/Users/procurar/' + getCookie('UserID');
+
+    console.log('url - ' + url);
+
+    var obj, dbParam, xmlhttp;
+
+    obj = { table: "user" };
+
+    dbParam = JSON.stringify(obj);
+
+    xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log('responcetext - ' + this.responseText);
+
+            User = JSON.parse(this.responseText).user;
+    
+            document.getElementById("inputNome").value = User.nome;
+            document.getElementById("inputEmail").value = User.email;
+
+            console.log('nome - ' + User.nome + ', email - ' + User.email);
+        }
+    };
+
+    xmlhttp.open("GET", url, true);
+    xmlhttp.setRequestHeader("x-access-token", getCookie('token'));
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("x=" + dbParam);
 }
