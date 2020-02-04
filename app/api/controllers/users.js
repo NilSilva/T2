@@ -7,6 +7,8 @@ const cookie = require('cookie-parser');
 
 const app = express();
 
+app.set('secretKey', 'nodeRestApi'); // jwt secret token
+
 app.use(cookie());
 
 module.exports = {
@@ -20,6 +22,14 @@ module.exports = {
     },
     //Ir para a pagina de editar
     paginaEditar: function(req, res){
+        jwt.verify(req.cookies['token'], req.app.get('secretKey'), function (err, decoded) {
+            console.log('1');
+            if (err) {
+                console.log('2');
+                res.sendFile(path.join(__dirname + '../../../../app/views/Erro.html'));
+            }
+        });
+        
         res.sendFile(path.join(__dirname + '../../../../app/views/editarUser.html'));
     },
     //Criar um novo utilizador
@@ -79,15 +89,9 @@ module.exports = {
     },
     //procurar um utilizador por id
     procurarPorID: function(req, res, next){
-        jwt.verify(req.cookies['token'], req.app.get('secretKey'), function (err, decoded) {
-            if (err) {
-                res.sendFile(path.join(__dirname + '/app/views/Erro.html'));
-            }
-        });
-
         userModel.findById(req.params.UserID, function (err, userInfo) {
             if (err) {
-                res.sendFile(path.join(__dirname + '/app/views/Erro.html'));
+                res.sendFile(path.join(__dirname + '../../../../app/views/Erro.html'));
             } else {
                 res.json({
                         user: userInfo
