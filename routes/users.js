@@ -17,6 +17,6 @@ router.get('/editar', userController.paginaEditar); //rota para ir para a pagina
 
 router.get('/procurar/:UserID', userController.procurarPorID); //rota para procurar pelo id
 
-router.post('/editar', userController.updateById);
+router.post('/editar', userController.updateById); //rota para editar um utilizador
 
 module.exports = router;
