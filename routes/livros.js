@@ -5,15 +5,9 @@ const router = express.Router();
 const livrosController = require('../app/api/controllers/livros');
 
 //rotas
-router.get('/', livrosController.page); //rota para "host/livros/" -> tabela com todos os livros
-
 router.get('/all', livrosController.getAll); //rota para obter um json com todos os livros
 
 router.post('/adicionar', livrosController.create); //rota para a função para inserir um novo livro na base de dados
-
-router.get('/adicionar', livrosController.adicionar); //rota para "host/livros/adicionar" -> pagina para criar um novo livro
-
-router.get('/livro', livrosController.detalhes); //rota para "host/livros/livro" -> pagina para ver os detalhes de um livro
 
 router.delete('/:livroId', livrosController.deleteById); //rota para apagar um livro
 

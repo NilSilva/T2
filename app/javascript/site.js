@@ -24,6 +24,8 @@ function tabelaLivros() {
 
             for (x in listaLivros) {
                 txt += "<tr><td onClick=\"details(" + x + ")\">" + listaLivros[x].nome + "</td><td>" + listaLivros[x].dataLancamento + "</td></tr>";
+
+                console.log("livro - " + listaLivros[x].nome);
             }
 
             txt += "</table>"
@@ -32,7 +34,10 @@ function tabelaLivros() {
         }
     };
 
-    xmlhttp.open("GET", window.location.href + '/all', true);
+    const url = 'http://' + window.location.host + '/livros/all';
+
+    console.log('url - ' + url);
+    xmlhttp.open("GET", url, true);
     xmlhttp.setRequestHeader("x-access-token", getCookie('token'));
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send("x=" + dbParam);
@@ -43,7 +48,9 @@ function details(i) {
     document.cookie = "data=" + listaLivros[i].dataLancamento;
     document.cookie = "id=" + listaLivros[i].id;
 
-    var url = window.location.href + '/livro';
+    var url = 'http//:' + window.location.host + '/Livros/Detalhes';
+
+    console.log('url2 - ' + url);
 
     window.location.href = url;
 

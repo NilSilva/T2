@@ -12,20 +12,10 @@ app.set('secretKey', 'nodeRestApi'); // jwt secret token
 app.use(cookie());
 
 module.exports = {
-    //Ir para a pagina de registo
-    paginaRegister: function (req, res) {
-        res.sendFile(path.join(__dirname + '../../../../app/views/register.html'));
-    },
-    //Ir para a pagina de login
-    paginaAuth: function (req, res) {
-        res.sendFile(path.join(__dirname + '../../../../app/views/login.html'));
-    },
     //Ir para a pagina de editar
     paginaEditar: function(req, res){
         jwt.verify(req.cookies['token'], req.app.get('secretKey'), function (err, decoded) {
-            console.log('1');
             if (err) {
-                console.log('2');
                 res.sendFile(path.join(__dirname + '../../../../app/views/Erro.html'));
             }
         });

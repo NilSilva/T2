@@ -24,8 +24,40 @@ app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookie());
 
+
+// Carregar paginas
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname + '/app/views/index.html'));
+});
+
+//ir para a pagina para registar um utilizador
+app.get('/Utilizador/Registar', function(req, res){
+    res.sendFile(path.join(__dirname + '/app/views/register.html'));
+});
+
+//ir para a pagina de login
+app.get('/Utilizador/Login', function(req, res){
+    res.sendFile(path.join(__dirname + '/app/views/login.html'));
+});
+
+//ir para a pagina para editar um utilizador
+app.get('/Utilizador/Editar', validateUser, function(req, res){
+    res.sendFile(path.join(__dirname + '/app/views/editarUser.html'));
+});
+
+//ir para a pagina de adicionar um livro
+app.get('/Livros/Adicionar', validateUser, function(req, res){
+    res.sendFile(path.join(__dirname + '/app/views/adicionar.html'));
+});
+
+//ir para a pagina dos detalhes dos livros
+app.get('/Livros/Detalhes', validateUser, function(req, res){
+    res.sendFile(path.join(__dirname + '/app/views/detalhes.html'));
+});
+
+//ir para a pagina dos livros(a tabela)
+app.get('/Livros/Lista', validateUser, function(req, res){
+    res.sendFile(path.join(__dirname + '/app/views/livros.html'));
 });
 
 app.use(express.static(path.join(__dirname, '/app/css')));

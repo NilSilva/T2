@@ -2,18 +2,6 @@ const modeloLivro = require('../models/livros');
 const path = require('path');
 
 module.exports = {
-    //ir para a pagina para adicionar um novo livro
-    adicionar: function (req, res, next) {
-        res.sendFile(path.join(__dirname + '../../../../app/views/adicionar.html'));
-    },
-    //ir para a pagina dos livros(a tabela)
-    page: function (req, res, next) {
-        res.sendFile(path.join(__dirname + '../../../../app/views/livros.html'));
-    },
-    //ir para a pagina de detalhes dos livros
-    detalhes: function (req, res, next) {
-        res.sendFile(path.join(__dirname + '../../../../app/views/detalhes.html'));
-    },
     //procurar um livro por id
     getById: function (req, res, next) {
         modeloLivro.findById(req.params.livroId, function (err, livroInfo) {
